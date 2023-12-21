@@ -129,7 +129,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("--------Electric Motorcycle--------{0}{0}{1} License Type: {2}{0}Engine Volume: {3}{0}{0}", Environment.NewLine, base.ToString(), m_LicenseType, m_EngineVolume);
+            string message = string.Format("--------Electric Motorcycle--------{0}{0}{1}License Type: {2}{0}Engine Volume: {3}{0}{0}", Environment.NewLine, base.ToString(), m_LicenseType, m_EngineVolume);
             return message;
         }
     }
