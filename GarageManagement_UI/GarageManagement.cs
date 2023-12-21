@@ -10,12 +10,9 @@ namespace GarageManagement_UI
 {
     public class GarageManagement
     {
-        private const string k_NewLine = "\n";
-        private const string k_NewLines = "\n\n";
-        private const string k_InvalidInputMessage = "Invalid Input!";
-
-        private bool         m_ContinueProgram;
-        private Garage       m_Garage;
+        private const string k_InvalidInputMessage = "Invalid Input!\n\n";
+        private bool m_ContinueProgram;
+        private Garage m_Garage;
 
 
         public GarageManagement()
@@ -23,16 +20,14 @@ namespace GarageManagement_UI
             m_Garage = new Garage();
             m_ContinueProgram = true;
         }
-
-        public static void Main()
+        public void StartProgram()
         {
-            GarageManagement program = new GarageManagement();
 
-            while (program.m_ContinueProgram)
+            while (m_ContinueProgram)
             {
                 try
                 {
-                    program.Menu();
+                    Menu();
                 }
                 catch (FormatException i_Fex)
                 {
@@ -55,7 +50,7 @@ namespace GarageManagement_UI
 
         public void MenuMessage()
         {
-            Console.WriteLine(@"------******** WELCOME TO THE GARAGE ********------
+            Console.WriteLine(string.Format(@"------******** WELCOME TO THE GARAGE ********------
 
 Please choose from the following options: 
 1. Add new car to garage
@@ -65,7 +60,7 @@ Please choose from the following options:
 5. Refuel a motorized vehicle 
 6. Charge an electric vehicle
 7. Display vehicle data
-8. Exit");
+8. Exit"));
         }
 
         public void Menu()
@@ -77,7 +72,6 @@ Please choose from the following options:
             if (int.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine();
-
                 switch (choice)
                 {
                     case 1:
@@ -138,7 +132,7 @@ Please choose from the following options:
                         }
                     default:
                         {
-                            throw new Exception(k_InvalidInputMessage + k_NewLines);
+                            throw new Exception(k_InvalidInputMessage);
                         }
                 }
             }
@@ -146,7 +140,7 @@ Please choose from the following options:
             else
             {
                 Console.WriteLine();
-                throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(k_InvalidInputMessage);
             }
         }
 
@@ -183,7 +177,8 @@ Please choose from the following options:
 
                 m_Garage.AddNewVehicle(vehicle, ownerName, ownerPhone);
 
-                Console.WriteLine("Your vehicle is being repaired" + k_NewLines);
+                Console.WriteLine(String.Format("Your vehicle is being repaired{0}{0}", Environment.NewLine));
+
 
             }
         }
@@ -202,7 +197,7 @@ Please choose from the following options:
 
         public VehicleInGarage GetLicenseNumberAndCheckIsExists(ref string io_LicenseNumber)
         {
-            Console.WriteLine("Please enter car's license number:");
+            Console.WriteLine("Please enter car's license number: (8 digits)");
             io_LicenseNumber = Console.ReadLine();
             Console.WriteLine();
             CheckLicenseNumberValidation(io_LicenseNumber);
@@ -241,7 +236,7 @@ Please choose from the following options:
                 Console.WriteLine($"There are no vehicles in the garage in the state: {i_State.ToString()}");
             }
 
-            Console.WriteLine(k_NewLine);
+            Console.WriteLine(Environment.NewLine);
         }
 
         public void UpdateVehicleState()
@@ -253,28 +248,28 @@ Please choose from the following options:
             Console.WriteLine();
             CheckLicenseNumberValidation(licenseNumber);
 
-            Console.WriteLine(@"Please enter the new state of the vehicle:
+            Console.WriteLine(string.Format(@"Please enter the new state of the vehicle:
 1. Under Repair
 2. Repaired
-3. Paid");
+3. Paid"));
 
             if (!(int.TryParse(Console.ReadLine(), out newState)))
             {
                 Console.WriteLine();
-                throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(k_InvalidInputMessage);
             }
 
             else if (newState < 1 || newState > 3)
             {
                 Console.WriteLine();
-                throw new Exception(k_InvalidInputMessage + k_NewLines);
+                throw new Exception(k_InvalidInputMessage);
             }
             else
             {
                 Console.WriteLine();
                 VehicleInGarage.eVehicleState eNewState = (VehicleInGarage.eVehicleState)newState;
                 m_Garage.UpdateVehicleState(licenseNumber, eNewState);
-                Console.WriteLine($"The status of {licenseNumber} has been changed to {eNewState.ToString()}\n\n");
+                Console.WriteLine(string.Format("The status of {0} has been changed to {1}{2}{2}", licenseNumber, eNewState.ToString(), Environment.NewLine));
             }
         }
 
@@ -287,7 +282,7 @@ Please choose from the following options:
 
             m_Garage.InflateWheels(licenseNumber);
 
-            Console.WriteLine("The wheels were inflated to the maximum position\n\n");
+            Console.WriteLine(string.Format("The wheels were inflated to the maximum position{0}{0}", Environment.NewLine));
         }
 
         public void Refuel()
@@ -300,22 +295,22 @@ Please choose from the following options:
             Console.WriteLine();
             CheckLicenseNumberValidation(licenseNumber);
 
-            Console.WriteLine(@"Please enter the fuel type: 
+            Console.WriteLine(string.Format(@"Please enter the fuel type: 
 1. Soler
 2. Octan 95
 3. Octan 96
-4. Octan 98");
+4. Octan 98"));
 
             if (!(int.TryParse(Console.ReadLine(), out fuelType)))
             {
                 Console.WriteLine();
-                throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(k_InvalidInputMessage);
             }
 
             else if (fuelType < 1 || fuelType > 4)
             {
                 Console.WriteLine();
-                throw new Exception(k_InvalidInputMessage + k_NewLines);
+                throw new Exception(k_InvalidInputMessage);
             }
 
             else
@@ -326,14 +321,14 @@ Please choose from the following options:
                 if (!(float.TryParse(Console.ReadLine(), out fuelAmountToFill)))
                 {
                     Console.WriteLine();
-                    throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                    throw new FormatException(k_InvalidInputMessage);
                 }
 
                 else
                 {
                     Console.WriteLine();
                     m_Garage.Refuel(licenseNumber, (MotorizedVehicle.eFuelType)fuelType, fuelAmountToFill);
-                    Console.WriteLine("Refueling completed successfully\n\n");
+                    Console.WriteLine(string.Format("Refueling completed successfully{0}{0}", Environment.NewLine));
                 }
             }
         }
@@ -357,26 +352,22 @@ Please choose from the following options:
             else
             {
                 Console.WriteLine();
-                throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(k_InvalidInputMessage);
             }
-
-            Console.WriteLine("Charging completed successfully\n\n");
-
+            Console.WriteLine(string.Format("Charging completed successfully{0}{0}", Environment.NewLine));
         }
-
         public void DisplayVehiclesLicenseNumbers()
         {
             int counter = 1;
-            Console.WriteLine("------Vehicle's License Numbers------\n\n");
+            Console.WriteLine(string.Format("------Vehicle's License Numbers------{0}{0}", Environment.NewLine));
 
             foreach (VehicleInGarage vehicle in m_Garage.Vehicles.Values)
             {
                 Console.WriteLine(counter++ + ". " + vehicle.Vehicle.LicenseNumber);
             }
 
-            Console.WriteLine(k_NewLine);
+            Console.WriteLine(Environment.NewLine);
         }
-
         public void DisplayVehicleDetails()
         {
             Console.WriteLine("Please enter the license number: ");
@@ -391,42 +382,16 @@ Please choose from the following options:
                 Console.WriteLine(vehicleInGarage.ToString());
 
                 Vehicle vehicle = vehicleInGarage.Vehicle;
-
-                if (vehicle is MotorizedCar)
-                {
-                    Console.WriteLine(((MotorizedCar)vehicle).ToString());
-                }
-
-                else if (vehicle is MotorizedMotorcycle)
-                {
-                    Console.WriteLine(((MotorizedMotorcycle)vehicle).ToString());
-                }
-
-                else if (vehicle is ElectricCar)
-                {
-                    Console.WriteLine(((ElectricCar)vehicle).ToString());
-                }
-
-                else if (vehicle is ElectricMotorcycle)
-                {
-                    Console.WriteLine(((ElectricMotorcycle)vehicle).ToString());
-                }
-
-                else if (vehicle is Truck)
-                {
-                    Console.WriteLine(((Truck)vehicle).ToString());
-                }
-
+                Console.WriteLine(vehicle.ToString());
             }
 
             else
             {
-                throw new Exception("The vehicle does not exist in the garage" + k_NewLines);
+                throw new Exception(string.Format("The vehicle does not exist in the garage{0}{0}", Environment.NewLine));
             }
 
         }
 
     }
-
 }
 

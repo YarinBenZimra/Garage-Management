@@ -8,15 +8,15 @@ namespace GarageManagement_Logic
     public class Truck : MotorizedVehicle
     {
 
-        private const string    k_CarriesHazardousMaterialsTopicName = "Is Carries Hazardous Materials";
-        private const string    k_CargoVolumeTopicName = "Cargo Volume";
-        private const float     k_MaxFuelAmount = 135f;
-        private const float     k_MaxAirPressure = 26f;
-        private const int       k_NumOfWheels = 14;
+        private const string k_CarriesHazardousMaterialsTopicName = "Is Carries Hazardous Materials";
+        private const string k_CargoVolumeTopicName = "Cargo Volume";
+        private const float k_MaxFuelAmount = 135f;
+        private const float k_MaxAirPressure = 26f;
+        private const int k_NumOfWheels = 14;
         private const eFuelType k_FuelType = eFuelType.Soler;
 
-        private bool            m_CarriesHazardousMaterials;
-        private float           m_CargoVolume;
+        private bool m_CarriesHazardousMaterials;
+        private float m_CargoVolume;
 
         public bool CarriesHazardousMaterials
         {
@@ -31,7 +31,7 @@ namespace GarageManagement_Logic
             {
                 if (value < 0)
                 {
-                    throw new ValueOutOfRangeException(int.MaxValue, 0, "\nInvalid Input!\n\nThe cargo volume must be positive." + k_NewLines);
+                    throw new ValueOutOfRangeException(int.MaxValue, 0, string.Format("{0}Invalid Input!{0}{0}The cargo volume must be positive.{0}{0}", Environment.NewLine));
                 }
 
                 m_CargoVolume = value;
@@ -81,11 +81,11 @@ namespace GarageManagement_Logic
 
             if (!(int.TryParse(i_Answer, out answer)))
             {
-                throw new FormatException("\n" + k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(string.Format("{0}{1}{0}{0}", Environment.NewLine, k_InvalidInputMessage));
             }
             else if (answer < 1 || answer > 2)
             {
-                throw new Exception("\n" + k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(string.Format("{0}{1}{0}{0}", Environment.NewLine, k_InvalidInputMessage));
             }
 
             else if (answer == 1)
@@ -101,7 +101,7 @@ namespace GarageManagement_Logic
 
             if (!(float.TryParse(i_Answer, out answer)))
             {
-                throw new FormatException("\n" + k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(string.Format("{0}{1}{0}{0}", Environment.NewLine, k_InvalidInputMessage));
             }
 
             else
@@ -112,7 +112,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("--------Truck--------\n\n" + base.ToString() + "Carries Hazardous Materials: {0}\nCargo Volume: {1}\n\n", m_CarriesHazardousMaterials.ToString(), m_CargoVolume);
+            string message = string.Format("--------Truck--------{0}{0}{1}Carries Hazardous Materials: {2}{0}Cargo Volume: {3}{0}{0}", Environment.NewLine, base.ToString(), m_CarriesHazardousMaterials.ToString(), m_CargoVolume);
             return message;
         }
     }

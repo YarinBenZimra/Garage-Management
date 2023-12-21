@@ -9,13 +9,13 @@ namespace GarageManagement_Logic
     public class ElectricCar : ElectricVehicle
     {
 
-        private const string   k_ColorTopicName = "Color";
-        private const string   k_NumberOfDoorsTopicName = "Number Of Doors";
-        private const float    k_MaxBatteryTime = 5.2f;
-        private const float    k_MaxAirPressure = 33f;
-        private const int      k_NumOfWheels = 5;
+        private const string k_ColorTopicName = "Color";
+        private const string k_NumberOfDoorsTopicName = "Number Of Doors";
+        private const float k_MaxBatteryTime = 5.2f;
+        private const float k_MaxAirPressure = 33f;
+        private const int k_NumOfWheels = 5;
 
-        private eColor         m_Color;
+        private eColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
 
         public enum eColor
@@ -44,7 +44,7 @@ namespace GarageManagement_Logic
                     value != eNumberOfDoors.Four && value != eNumberOfDoors.Five)
                 {
                     throw new ValueOutOfRangeException((int)eNumberOfDoors.Five, (int)eNumberOfDoors.Two,
-                        $"\nInvalid Input!\n\nThe amount of doors should be between {eNumberOfDoors.Two} to {eNumberOfDoors.Five}" + k_NewLines);
+                        string.Format("{0}Invalid Input!{0}{0}The amount of doors should be between {1} to {2}", Environment.NewLine, eNumberOfDoors.Two, eNumberOfDoors.Five));
                 }
 
                 m_NumberOfDoors = value;
@@ -60,8 +60,7 @@ namespace GarageManagement_Logic
                 if (value != eColor.Red && value != eColor.Black &&
                    value != eColor.White && value != eColor.Yellow)
                 {
-                    throw new Exception($"\nInvalid Input!\n\nThe color of the car should be one of the following colors: " +
-                        $" {eColor.Red} , {eColor.Black} , {eColor.White} , {eColor.Yellow}" + k_NewLines);
+                    throw new Exception(string.Format("{0}Invalid Input!{0}{0}The color of the car should be one of the following colors: {1}, {2}, {3}, {4}", Environment.NewLine, eColor.Red, eColor.Black, eColor.White, eColor.Yellow));
                 }
 
                 m_Color = value;
@@ -116,7 +115,7 @@ namespace GarageManagement_Logic
 
             if (!(int.TryParse(i_Answer, out answer)))
             {
-                throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(k_InvalidInputMessage);
             }
 
             else
@@ -131,7 +130,7 @@ namespace GarageManagement_Logic
 
             if (!(int.TryParse(i_Answer, out answer)))
             {
-                throw new FormatException(k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(k_InvalidInputMessage);
             }
 
             else
@@ -142,7 +141,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("--------Electric Car--------\n\n" + base.ToString() + "Color: {0}\nNumber Of Doors: {1}\n\n", m_Color, m_NumberOfDoors);
+            string message = string.Format("--------Electric Car--------{0}{0}{1}Color: {2}{0}Number Of Doors: {3}{0}{0}", Environment.NewLine, base.ToString(), m_Color, m_NumberOfDoors);
             return message;
         }
     }

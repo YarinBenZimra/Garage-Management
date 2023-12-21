@@ -8,8 +8,7 @@ namespace GarageManagement_Logic
     public abstract class Vehicle
     {
 
-        protected const string k_NewLines = "\n\n";
-        protected const string k_InvalidInputMessage = "Invalid Input!";
+        protected const string k_InvalidInputMessage = "Invalid Input!\n\n";
 
         private readonly List<SpecificQuestionForVehicle> r_SpecificQuestions = new List<SpecificQuestionForVehicle>();
 
@@ -65,7 +64,7 @@ namespace GarageManagement_Logic
             {
                 if ((value.ToString())[0] == ' ')
                 {
-                    throw new Exception("Invalid Name!" + k_NewLines);
+                    throw new Exception("Invalid Name!");
                 }
 
                 m_ModelName = value;
@@ -80,7 +79,7 @@ namespace GarageManagement_Logic
             {
                 if ((value.ToString())[0] == ' ')
                 {
-                    throw new Exception("Invalid Name!" + k_NewLines);
+                    throw new Exception("Invalid Name!");
                 }
 
                 m_LicenseNumber = value;
@@ -95,12 +94,12 @@ namespace GarageManagement_Logic
             {
                 if (value < 0)
                 {
-                    throw new ValueOutOfRangeException(100, 0, $"Energy percentage should be positive" + k_NewLines);
+                    throw new ValueOutOfRangeException(100, 0, $"Energy percentage should be positive{Environment.NewLine}");
                 }
 
                 if (value > 100)
                 {
-                    throw new ValueOutOfRangeException(100, 0, String.Format("Can not exceed {0} {1}", MaxEnergyAmount, m_IsFueled == true ? "litters.\n\n" : "hours.\n\n"));
+                    throw new ValueOutOfRangeException(100, 0, String.Format("Can not exceed {0} {1}", MaxEnergyAmount, m_IsFueled == true ? String.Format("litters.{0}{0}", Environment.NewLine) : String.Format("houers.{0}{0}", Environment.NewLine)));
                 }
 
                 m_EnergyPercentage = value;
@@ -141,7 +140,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("Model Name: {0}\nLicense Number: {1}\nEnergy Percentage: {2:F2}%\n\nWheels Details:\n\n{3}", m_ModelName, m_LicenseNumber, m_EnergyPercentage, m_Wheels[0].ToString());
+            string message = string.Format("Model Name: {0}{4}License Number: {1}{4}Energy Percentage: {2:F2}%{4}{4}Wheels Details:{4}{4}{3}", m_ModelName, m_LicenseNumber, m_EnergyPercentage, m_Wheels[0].ToString(), Environment.NewLine);
             return message;
         }
     }

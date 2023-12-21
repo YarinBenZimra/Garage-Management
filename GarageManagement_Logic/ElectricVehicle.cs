@@ -35,21 +35,22 @@ namespace GarageManagement_Logic
         {
             if (i_HoursToAdd <= 0)
             {
-                throw new ValueOutOfRangeException(MaxBatteryTime, 0, "Invalid charging time. The amount to charging must be positive." + k_NewLines);
+                throw new ValueOutOfRangeException(MaxBatteryTime, 0, string.Format("Invalid charging time. The amount to charging must be positive.{0}{0}", Environment.NewLine));
             }
 
             if (CurrentBatteryTime + i_HoursToAdd > MaxBatteryTime)
             {
-                throw new ValueOutOfRangeException(MaxBatteryTime, 0, $"Cannot charge more than {MaxBatteryTime - CurrentBatteryTime} hours." + k_NewLines);
+                throw new ValueOutOfRangeException(MaxBatteryTime, 0, string.Format("Cannot charge more than {0} hours.{1}{1}", (MaxBatteryTime - CurrentBatteryTime), Environment.NewLine));
             }
 
-                CurrentBatteryTime += i_HoursToAdd;
+            CurrentBatteryTime += i_HoursToAdd;
         }
 
         public override string ToString()
         {
-            string message = string.Format(base.ToString() + "General Details:\n\nMax Battery Time: {0}\nCurrent Battery Time: {1}\n", m_MaxBatteryTime, m_CurrentBatteryTime);
+            string message = string.Format("{3}General Details:{0}{0}Max Battery Time: {1}{0}Current Battery Time: {2}{0}", Environment.NewLine, m_MaxBatteryTime, m_CurrentBatteryTime, base.ToString());
             return message;
         }
+
     }
 }

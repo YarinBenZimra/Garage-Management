@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GarageManagement.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Validations.cs" />
   </ItemGroup>
   <ItemGroup>

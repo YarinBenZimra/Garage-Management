@@ -8,10 +8,7 @@ namespace GarageManagement_Logic
 {
     public class Garage
     {
-
-        private const string                        k_NewLines = "\n\n";
-
-        private readonly List<string>               r_VehiclesTypeNames = new List<string> { "Motorized Car", "Motorized Motorcycle", "Truck", "Electric Car", "Electric Motorcycle" };
+        private readonly List<string> r_VehiclesTypeNames = new List<string> { "Motorized Car", "Motorized Motorcycle", "Truck", "Electric Car", "Electric Motorcycle" };
 
         private Dictionary<string, VehicleInGarage> m_Vehicles;
 
@@ -78,7 +75,7 @@ namespace GarageManagement_Logic
 
             else
             {
-                throw new Exception("Vehicle does not exsist in the garage" + k_NewLines);
+                throw new Exception(string.Format("Vehicle does not exsist in the garage{0}{0}", Environment.NewLine));
             }
         }
 
@@ -101,7 +98,7 @@ namespace GarageManagement_Logic
 
             else
             {
-                throw new Exception("Vehicle does not exsist in the garage" + k_NewLines);
+                throw new Exception(string.Format("Vehicle does not exsist in the garage{0}{0}", Environment.NewLine));
             }
         }
 
@@ -121,13 +118,13 @@ namespace GarageManagement_Logic
 
                 else
                 {
-                    throw new Exception("The vehicle is not motorized" + k_NewLines);
+                    throw new Exception(string.Format("The vehicle is not motorized{0}{0}", Environment.NewLine));
                 }
             }
 
             else
             {
-                throw new Exception("Vehicle does not exsist in the garage" + k_NewLines);
+                throw new Exception(string.Format("Vehicle does not exsist in the garage{0}{0}", Environment.NewLine));
             }
         }
 
@@ -147,13 +144,13 @@ namespace GarageManagement_Logic
 
                 else
                 {
-                    throw new Exception("The vehicle is not electric" + k_NewLines);
+                    throw new Exception(string.Format("The vehicle is not electric{0}{0}", Environment.NewLine));
                 }
             }
 
             else
             {
-                throw new Exception("Vehicle does not exsist in the garage" + k_NewLines);
+                throw new Exception(string.Format("Vehicle does not exsist in the garage{0}{0}", Environment.NewLine));
             }
         }
 

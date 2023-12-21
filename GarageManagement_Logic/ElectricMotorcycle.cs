@@ -8,14 +8,14 @@ namespace GarageManagement_Logic
     public class ElectricMotorcycle : ElectricVehicle
     {
 
-        private const float  k_MaxAirPressure = 31f;
-        private const float  k_MaxBatteryTime = 2.6f;
-        private const int    k_NumOfWheels = 2;
+        private const float k_MaxAirPressure = 31f;
+        private const float k_MaxBatteryTime = 2.6f;
+        private const int k_NumOfWheels = 2;
         private const string k_LicensetypeTopicName = "License Type";
         private const string k_EngineVolumeTopicName = "Engine Volume";
 
         private eLicenseType m_LicenseType;
-        private int          m_EngineVolume;
+        private int m_EngineVolume;
 
         public enum eLicenseType
         {
@@ -34,8 +34,7 @@ namespace GarageManagement_Logic
                 if (value != eLicenseType.A1 && value != eLicenseType.A2 &&
                     value != eLicenseType.AA && value != eLicenseType.B1)
                 {
-                    throw new Exception("\nThe license type should be one of the following license types: " +
-                        $"{eLicenseType.A1},  {eLicenseType.A2}, {eLicenseType.AA} ,{eLicenseType.B1}" + k_NewLines);
+                    throw new Exception(string.Format("{0}The license type should be one of the following license types: {1}, {2}, {3}, {4}", Environment.NewLine, eLicenseType.A1, eLicenseType.A2, eLicenseType.AA, eLicenseType.B1));
                 }
 
                 m_LicenseType = value;
@@ -50,7 +49,7 @@ namespace GarageManagement_Logic
             {
                 if (value < 0)
                 {
-                    throw new ValueOutOfRangeException(int.MaxValue, 0, $"\nEngine volume must be positive" + k_NewLines);
+                    throw new ValueOutOfRangeException(int.MaxValue, 0, string.Format("{0}Engine volume must be positive", Environment.NewLine));
                 }
 
                 m_EngineVolume = value;
@@ -102,7 +101,7 @@ namespace GarageManagement_Logic
 
             if (!(int.TryParse(i_Answer, out answer)))
             {
-                throw new FormatException("\n" + k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(string.Format("{0}{1}", k_InvalidInputMessage, Environment.NewLine));
             }
 
             else
@@ -119,7 +118,7 @@ namespace GarageManagement_Logic
             if (!(int.TryParse(i_Answer, out answer)))
             {
                 Console.WriteLine();
-                throw new FormatException("\n" + k_InvalidInputMessage + k_NewLines);
+                throw new FormatException(string.Format("{0}{1}", k_InvalidInputMessage, Environment.NewLine));
             }
 
             else
@@ -130,7 +129,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("--------Electric Motorcycle--------\n\n" + base.ToString() + "License Type: {0}\nEngine Volume: {1}\n\n", m_LicenseType, m_EngineVolume);
+            string message = string.Format("--------Electric Motorcycle--------{0}{0}{1} License Type: {2}{0}Engine Volume: {3}{0}{0}", Environment.NewLine, base.ToString(), m_LicenseType, m_EngineVolume);
             return message;
         }
     }

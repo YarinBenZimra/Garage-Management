@@ -7,12 +7,10 @@ namespace GarageManagement_Logic
 {
     public class VehicleInGarage
     {
-        private const string  k_NewLines = "\n\n";
-
-        private Vehicle       m_Vehicle = null;
+        private Vehicle m_Vehicle = null;
         private eVehicleState m_VehicleState;
-        private string        m_OwnerName;
-        private string        m_OwnerPhone;
+        private string m_OwnerName;
+        private string m_OwnerPhone;
 
         public enum eVehicleState
         {
@@ -42,7 +40,7 @@ namespace GarageManagement_Logic
             {
                 if ((value.ToString())[0] == ' ')
                 {
-                    throw new Exception("Invalid Name!" + k_NewLines);
+                    throw new Exception(string.Format("Invalid Name!{0}{0}", Environment.NewLine));
                 }
 
                 m_OwnerName = value;
@@ -57,7 +55,7 @@ namespace GarageManagement_Logic
             {
                 if ((value.ToString())[0] == ' ')
                 {
-                    throw new Exception("Invalid Phone!" + k_NewLines);
+                    throw new Exception(string.Format("Invalid Phone!{0}{0}", Environment.NewLine));
                 }
 
                 m_OwnerPhone = value;
@@ -72,8 +70,8 @@ namespace GarageManagement_Logic
             {
                 if (value != eVehicleState.UnderRepair && value != eVehicleState.Repaired && value != eVehicleState.Paid)
                 {
-                    throw new Exception("The vehicle state should be one of the following vehicle states: " +
-                        $"{eVehicleState.Paid},  {eVehicleState.UnderRepair}, {eVehicleState.Repaired}" + k_NewLines);
+                    throw new Exception(string.Format("The vehicle state should be one of the following vehicle states: {1}, {2}, {3}{0}{0}",
+                       Environment.NewLine, eVehicleState.Paid, eVehicleState.UnderRepair, eVehicleState.Repaired));
                 }
 
                 m_VehicleState = value;
@@ -93,7 +91,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("**** Vheicle & Owner Details ****\n\nOwner Details:\n\nOwner Name: {0}\nOwner Phone: {1}\nVehicle State: {2}\n\n", m_OwnerName, m_OwnerPhone, m_VehicleState);
+            string message = string.Format("**** Vheicle & Owner Details ****{0}{0}Owner Details:{0}{0}Owner Name: {1}{0}Owner Phone: {2}\nVehicle State: {3}\n\n", Environment.NewLine, m_OwnerName, m_OwnerPhone, m_VehicleState);
             return message;
         }
     }

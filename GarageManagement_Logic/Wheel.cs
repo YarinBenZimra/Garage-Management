@@ -9,8 +9,8 @@ namespace GarageManagement_Logic
     {
 
         private string m_ManufacturerName;
-        private float  m_CurrentAirPressure;
-        private float  m_MaxAirPressure;
+        private float m_CurrentAirPressure;
+        private float m_MaxAirPressure;
 
         public string ManufacturerName
         {
@@ -20,7 +20,7 @@ namespace GarageManagement_Logic
             {
                 if ((value.ToString())[0] == ' ')
                 {
-                    throw new Exception("Invalid Name!\n\n");
+                    throw new Exception(string.Format("Invalid Name!{0}{0}", Environment.NewLine));
                 }
 
                 m_ManufacturerName = value;
@@ -35,12 +35,12 @@ namespace GarageManagement_Logic
             {
                 if (value <= 0)
                 {
-                    throw new ValueOutOfRangeException(m_MaxAirPressure, 0, "The value is out of range, the amount of air pressure must be positive.\n\n");
+                    throw new ValueOutOfRangeException(m_MaxAirPressure, 0, string.Format("The value is out of range, the amount of air pressure must be positive.{0}{0}", Environment.NewLine));
                 }
 
                 if (value > m_MaxAirPressure)
                 {
-                    throw new ValueOutOfRangeException(m_MaxAirPressure, 0, $"The amount of the air pressure can not exceed {m_MaxAirPressure}\n\n");
+                    throw new ValueOutOfRangeException(m_MaxAirPressure, 0, string.Format("The amount of the air pressure can not exceed {1}{0}{0}", m_MaxAirPressure));
                 }
 
                 m_CurrentAirPressure = value;
@@ -67,8 +67,8 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format("Manufacturer Name: {0}\nCurrent Air Pressure: {1}\nMax Air Pressure: {2}\n\n"
-                                            , m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPressure);
+            string message = string.Format("Manufacturer Name: {1}{0}Current Air Pressure: {2}{0}Max Air Pressure: {3}{0}{0}"
+                                            , Environment.NewLine, m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPressure);
             return message;
         }
     }

@@ -7,7 +7,6 @@ namespace GarageManagement_Logic
 {
     public class SpecificAnswerForVehicle
     {
-
         string m_Answer;
         string m_VehicleSpecificDataMemberName;
 

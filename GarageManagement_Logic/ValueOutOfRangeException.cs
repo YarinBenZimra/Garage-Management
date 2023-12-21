@@ -5,7 +5,6 @@ using System.Text;
 
 namespace GarageManagement_Logic
 {
-
     public class ValueOutOfRangeException : Exception
     {
         private float m_MaxValue;

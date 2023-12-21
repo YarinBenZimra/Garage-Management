@@ -8,8 +8,8 @@ namespace GarageManagement_Logic
     public abstract class MotorizedVehicle : Vehicle
     {
 
-        private float     m_CurrentFuelAmount;
-        private float     m_MaxFuelAmount;
+        private float m_CurrentFuelAmount;
+        private float m_MaxFuelAmount;
         private eFuelType m_FuelType;
 
         public enum eFuelType
@@ -35,7 +35,7 @@ namespace GarageManagement_Logic
             {
                 if (value <= 0)
                 {
-                    throw new ValueOutOfRangeException(int.MaxValue, 0, "Invalid fuel amount. The fuel amount must be positive." + k_NewLines);
+                    throw new ValueOutOfRangeException(int.MaxValue, 0, string.Format("Invalid fuel amount. The fuel amount must be positive.{0}{0}", Environment.NewLine));
                 }
 
                 m_MaxFuelAmount = value;
@@ -59,17 +59,17 @@ namespace GarageManagement_Logic
         {
             if (i_FuelType != FuelType)
             {
-                throw new Exception($"Invalid type: {i_FuelType}. This vehicle requires {FuelType} fuel." + k_NewLines);
+                throw new Exception(string.Format("Invalid type: {1}. This vehicle requires {2} fuel.{0}{0}", Environment.NewLine, i_FuelType, FuelType));
             }
 
             if (i_Amount <= 0)
             {
-                throw new ValueOutOfRangeException(MaxFuelAmount, 0, "Invalid fuel amount. The amount to refuel must be positive." + k_NewLines);
+                throw new ValueOutOfRangeException(MaxFuelAmount, 0, string.Format("Invalid fuel amount. The amount to refuel must be positive.{0}{0}", Environment.NewLine));
             }
 
             if (CurrentFuelAmount + i_Amount > MaxFuelAmount)
             {
-                throw new ValueOutOfRangeException(MaxFuelAmount, 0, $"Cannot refuel more than {MaxFuelAmount - CurrentFuelAmount} liters of fuel." + k_NewLines);
+                throw new ValueOutOfRangeException(MaxFuelAmount, 0, string.Format("Cannot refuel more than {1} liters of fuel.{0}{0}", Environment.NewLine, (MaxFuelAmount - CurrentFuelAmount)));
             }
 
             CurrentFuelAmount += i_Amount;
@@ -77,7 +77,7 @@ namespace GarageManagement_Logic
 
         public override string ToString()
         {
-            string message = string.Format(base.ToString() + "General Details:\n\nCurrent Fuel Amount: {0}\nMax Fuel Amout: {1}\nFuel Type: {2}\n", m_CurrentFuelAmount, m_MaxFuelAmount, m_FuelType);
+            string message = string.Format("{1}General Details:{0}{0}Current Fuel Amount: {2}{0}Max Fuel Amout: {3}{0}Fuel Type: {4}{0}", Environment.NewLine, base.ToString(), m_CurrentFuelAmount, m_MaxFuelAmount, m_FuelType);
             return message;
         }
     }
